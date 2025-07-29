@@ -14,7 +14,7 @@ A secure Node.js + GraphQL note-taking app with user authentication, profile upl
 
 🤖 AI Note Summarizer using OpenAI API
 
-🛡️ Security Middleware: Rate Limiter, Helmet, CORS
+🛡️ Security Middleware: Rate Limiter, CORS
 
 🐳 Dockerized for Easy Deployment
 
