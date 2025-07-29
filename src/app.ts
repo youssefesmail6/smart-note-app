@@ -1,4 +1,4 @@
-import "reflect-metadata"; 
+import "reflect-metadata";
 import express, { Application, Request, Response } from "express";
 import env, { envSchema } from "./config/env.config";
 import { Logger } from "./services/logger.service";
@@ -7,9 +7,7 @@ import cors from "cors";
 import { dbConnection } from "./config/db.config";
 import ErrorHandlerMiddleware from "./middlewares/error-handler.middleware";
 import { getRouters } from "./utils/getRouters";
-
-
-
+import { applyGraphQLMiddleware } from "./graphql/graphQl.server";
 
 class App {
   private app!: Application;
@@ -27,7 +25,7 @@ class App {
     const appInstance = new App();
     appInstance.validateEnv();
     appInstance.app = express();
-    appInstance.initializeMiddlewares();
+    await appInstance.initializeMiddlewares();
     await dbConnection();
     await appInstance.initializeRoutes();
     appInstance.errorHandler();
@@ -41,18 +39,19 @@ class App {
     }
   }
 
-  private initializeMiddlewares() {
+  private async initializeMiddlewares() {
     this.app.use(cors(this.corsOptions));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
 
-    // Test route to check JSON response
+    // Test route
     this.app.get("/", (req: Request, res: Response) => {
       res.json({ message: "Hello World!" });
     });
+
+
+    await applyGraphQLMiddleware(this.app as any);
   }
-  
-  
 
   private async initializeRoutes() {
     const routers = await getRouters();
