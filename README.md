@@ -1,56 +1,52 @@
-🧠 Smart Note App
-A secure Node.js + GraphQL note-taking app with user authentication, profile uploads, AI-powered summarization, and Docker support.
+# 🧠 Smart Note App
 
-🚀 Features
-🔐 JWT Auth (asymmetric) + Token Revocation
+A secure **Node.js + GraphQL** note-taking application with user authentication, profile uploads, AI-powered summarization, and Docker support.
 
-📝 Create/Delete Notes
+---
 
-📊 GraphQL Notes Query with Filters & Pagination
+## 🚀 Features
+- 🔐 **JWT Authentication (asymmetric)** with token revocation  
+- 📝 **Create & Delete Notes**  
+- 📊 **GraphQL Notes Query** with filters & pagination  
+- 📷 **Upload Profile Picture** (Multer with safe filename handling)  
+- 🔁 **Password Reset via OTP** (email-based)  
+- 🤖 **AI Note Summarizer** using OpenAI API  
+- 🛡️ **Security Middleware** (Rate Limiter)  
+- 🐳 **Dockerized** for easy deployment  
 
-📷 Upload Profile Picture (Multer, safe filename handling)
+---
 
-🔁 Password Reset via OTP (Email-based)
+## 📦 Tech Stack
+- **Backend**: Node.js, Express, GraphQL (Apollo)  
+- **Database**: MongoDB  
+- **Auth & Security**: JWT (RSA), Bcrypt, Joi, Multer, Nodemailer  
+- **AI Integration**: OpenAI API  
+- **DevOps**: Docker  
+- **Other**: Typedi, dotenv  
 
-🤖 AI Note Summarizer using OpenAI API
-
-🛡️ Security Middleware: Rate Limiter, CORS
-
-🐳 Dockerized for Easy Deployment
-
-📦 Tech Stack
-Node.js, Express, MongoDB, GraphQL (Apollo)
-
-JWT (RSA), Bcrypt, Joi, Multer, Nodemailer
-
-OpenAI API, Docker, Typedi, dotenv
-
-📁 Project Structure
-bash
-Copy
-Edit
+---
+## 📁 Project Structure
 app.ts
-/config         → Env, DB, keys
-/controllers    → REST API logic
-/graphql        → TypeDefs & Resolvers
-/models         → Mongoose Schemas
-/services       → Auth, Notes, Email, AI
-/middlewares    → Auth, RateLimiter, Error Handling
-/uploads        → Profile Images
-⚙️ Local Setup
-bash
-Copy
-Edit
+/config → Env, DB, keys
+/controllers → REST API logic
+/graphql → TypeDefs & Resolvers
+/models → Mongoose Schemas
+/services → Auth, Notes, Email, AI
+/middlewares → Auth, RateLimiter, Error Handling
+/uploads → Profile Images
+
+
+---
+
+## ⚙️ Local Setup
+```bash
 git clone https://github.com/youssefesmail6/smart-note-app.git
 cd smart-note-app
 npm install
 npm run dev
-🐳 Docker Setup
-Dockerfile
 
-dockerfile
-Copy
-Edit
+## 🐳 Docker Setup
+Dockerfile
 FROM satantime/puppeteer-node:20.9.0-buster-slim
 
 COPY . ./app
@@ -61,17 +57,12 @@ ENV NODE_ENV=development
 
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
-Build & Run
 
-bash
-Copy
-Edit
+Build & Run
 docker build -t smart-note-app .
 docker run -p 3000:3000 smart-note-app
+---
 📄 .env Example
-env
-Copy
-Edit
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/smartnote
 OPENAI_API_KEY=sk-...
@@ -80,33 +71,7 @@ EMAIL_PASS=your-password
 PRIVATE_KEY_PATH=./config/private.pem
 PUBLIC_KEY_PATH=./config/public.pem
 JWT_EXPIRES_IN=1d
-🧪 Testing
-REST: http://localhost:3000/api/...
+---
 
-GraphQL: http://localhost:3000/graphql
-
-Postman Collection: included in repo
-
-🔐 Security Middleware
-Helmet – Sets secure HTTP headers
-
-CORS – Restricts external origins
-
-Rate Limiter – Prevents abuse (e.g., login brute-force)
-
-🔧 Key Endpoints
-Auth
-Method	Route	Description
-POST	/register	Register a new user
-POST	/login	Authenticate user
-POST	/logout	Revoke login token
-POST	/forget-password	Send OTP to email
-POST	/reset-password	Reset password via OTP
-PATCH	/upload-profile-pic	Upload a safe profile image
-
-Notes
-Method	Route	Description
-POST	/notes	Create a new note
-DELETE	/notes/:id	Delete user-owned note
-POST	/notes/:id/summarize	Get AI summary of a note
-GET	/graphql	Query notes with filters
+## 🔐 Security Middleware
+Rate Limiter – prevents abuse (e.g., login brute-force)
