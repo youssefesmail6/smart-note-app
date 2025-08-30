@@ -73,5 +73,3 @@ PUBLIC_KEY_PATH=./config/public.pem
 JWT_EXPIRES_IN=1d
 ---
 
-## 🔐 Security Middleware
-Rate Limiter – prevents abuse (e.g., login brute-force)
